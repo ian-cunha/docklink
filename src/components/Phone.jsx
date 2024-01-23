@@ -40,4 +40,8 @@ border-radius: 50px;
 padding: 2px 0;
 margin: 20px 5px;
 cursor: pointer;
+&:hover {
+  background: #535BF2;
+  color: white;
+}
 `
