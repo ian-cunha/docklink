@@ -1,4 +1,4 @@
-import { View, BlockView, Block, Items } from "../components/View"
+import { View, BlockView, Block, Items, ViewBox } from "../components/View"
 
 import { Navigate } from 'react-router-dom'
 
@@ -6,6 +6,8 @@ import { auth } from "../config/firebase"
 
 import { Structure } from "../components/Structure"
 import { NavBoard } from "../components/NavBoard";
+import { InputBox, InputView } from "../components/Form";
+import { ButtonBox } from "../components/Button";
 
 export const Dashboard = () => {
 
@@ -22,19 +24,19 @@ export const Dashboard = () => {
       <BlockView>
         <Block>
           <Items>
-            <h2>Link 1</h2>
-          </Items>
-          <Items>
-            <h2>Link 2</h2>
-          </Items>
-          <Items>
-            <h2>Link 3</h2>
-          </Items>
-          <Items>
-            <h2>Link 4</h2>
-          </Items>
-          <Items>
-            <h2>Link 5</h2>
+            <ViewBox>
+              <InputView>
+                <i className="bi bi-pen"></i>
+                <InputBox placeholder="Título" />
+              </InputView>
+              <InputView>
+                <i className="bi bi-pen"></i>
+                <InputBox placeholder="URL" />
+              </InputView>
+            </ViewBox>
+            <ViewBox>
+              <ButtonBox className="bi bi-cloud-upload" />
+            </ViewBox>
           </Items>
         </Block>
         <Block>

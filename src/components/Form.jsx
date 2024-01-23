@@ -43,3 +43,24 @@ color: black;
   height: 50px;
   }
 `
+
+export const InputBox = styled.input`
+width: 500px;
+height: 30px;
+background: white;
+border-radius: 5px;
+margin: 10px;
+font-size: 1em;
+font-weight: 600;
+border: none;
+@media (max-width: 1100px) {
+  width: 340px;
+  }
+`
+
+export const InputView = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+`

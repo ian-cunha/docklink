@@ -110,3 +110,15 @@ export const ButtonProfile = styled.nav`
   margin-top: 90px;
   }
 `
+
+export const ButtonBox = styled.button`
+font-size: 2em;
+font-weight: 600;
+border-color: transparent;
+background: transparent;
+color: black;
+cursor: pointer;
+&:hover {
+  color: #535BF2;
+};
+`

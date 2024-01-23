@@ -73,7 +73,7 @@ height: 100vh;
 `
 
 export const Block = styled.div`
-margin: 250px 100px;
+margin: 250px 50px;
 padding: 24px;
 border-radius: 20px;
 color: white;
@@ -92,14 +92,15 @@ background: white;
 color: black;
 padding: 5px 20px;
 border-radius: 10px;
-width: 300px;
+width: 650px;
 display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: center;
 margin: 5px 0;
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
   flex-direction: column;
+  width: 100%;
   }
 `
 
@@ -112,4 +113,18 @@ export const ViewLoading = styled.div`
   font-weight: bold;
   color: #535BF2;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+`
+
+export const ViewBox = styled.div`
+padding: 5px 20px;
+border-radius: 10px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+margin: 5px 0;
+@media (max-width: 1100px) {
+  flex-direction: column;
+  width: 100%;
+  }
 `
