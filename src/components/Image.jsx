@@ -4,7 +4,6 @@ export const Logo = styled.img`
 width: 100px;
 height: auto;
 padding: 18px;
-border-radius: 50px;
 `
 
 export const LogoLogin = styled.img`

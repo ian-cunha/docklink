@@ -15,7 +15,6 @@ cursor: pointer;
   background: #535BF2;
   border-color: rgba(255, 255, 255, 0.87);
   border-style: solid;
-  border-radius: 50px;
 }
 `
 
