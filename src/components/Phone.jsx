@@ -17,6 +17,7 @@ justify-content: center;
 
 export const ImageLinking = styled.img`
 width: 80px;
+height: 80px;
 border-radius: 50px;
 `
 
