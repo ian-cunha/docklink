@@ -12,6 +12,9 @@ export const Structure = () => {
 
   const user = auth.currentUser;
   const uid = user.uid;
+  const name = user.displayName;
+  const email = user.email;
+  const photo = user.photoURL;
 
   const [dataBase, setDataBase] = useState('')
 
@@ -34,9 +37,9 @@ export const Structure = () => {
   return (
     <ViewStructure>
       <PhoneStyle>
-        <ImageLinking src={'https://static.vecteezy.com/ti/vetor-gratis/p1/18765757-icone-de-perfil-de-usuario-em-estilo-simples-ilustracao-em-avatar-membro-no-fundo-isolado-conceito-de-negocio-de-sinal-de-permissao-humana-vetor.jpg'} />
-        <Title>Nome</Title>
-        <SubTitle>email@gmail.com</SubTitle>
+        <ImageLinking src={photo} />
+        <Title>{name}</Title>
+        <SubTitle>{email}</SubTitle>
         <Blocks>
           <p>GitHub</p>
         </Blocks>
