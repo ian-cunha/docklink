@@ -29,9 +29,13 @@ export const Dashboard = () => {
       <NavBoard />
       <BlockView>
         <Block>
-          <h2>Dashboard</h2>
-          <p>Bem-vindo de volta, {name}.</p>
-          <Button onClick={handleSignOut}>Sair</Button>
+          <div>
+            <h2>Dashboard</h2>
+            <p>Bem-vindo de volta, {name}.</p>
+          </div>
+          <div>
+            <Button onClick={handleSignOut}>Sair</Button>
+          </div>
         </Block>
         <Block>
           <Structure />

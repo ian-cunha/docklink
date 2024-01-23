@@ -78,6 +78,10 @@ padding: 60px;
 margin: 12px;
 border-radius: 20px;
 color: white;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
 `
 
 export const ViewLoading = styled.div`

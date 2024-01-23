@@ -30,9 +30,9 @@ export const Structure = () => {
   }, [])
 
   return (
-    <>
+    <div>
       <h2>Estrutura ID:</h2>
       <p>{uid}</p>
-    </>
+    </div>
   )
 }
