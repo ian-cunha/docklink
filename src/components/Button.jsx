@@ -52,7 +52,7 @@ z-index: 1;
 cursor: pointer;
 &:hover {
   color: #535BF2;
-}
+};
 `
 
 export const Menu = styled.button`
@@ -68,7 +68,10 @@ display: none;
 cursor: pointer;
 &:hover {
   color: #535BF2;
-}
+};
+&:focus, &:active {
+    outline:none;
+};
 @media (max-width: 768px) {
   display: block;
   }

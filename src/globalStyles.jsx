@@ -44,10 +44,6 @@ body {
     color: white;
 }
 
-button:focus, button:active {
-    outline:none;
-}
-
 .loader {
   position: relative;
   width: 64px;
