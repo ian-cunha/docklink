@@ -79,3 +79,14 @@ margin: 12px;
 border-radius: 20px;
 color: white;
 `
+
+export const ViewLoading = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 2em;
+  font-weight: bold;
+  color: #535BF2;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+`

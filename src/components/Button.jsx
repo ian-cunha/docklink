@@ -80,9 +80,11 @@ display: flex;
   display: none;
   flex-direction: column;
   position: absolute;
-  left: 100px;
-  background: #535BF2;
+  background: white;
   border-radius: 30px;
   z-index: 10;
+  left: 0;
+  right: 0;
+  margin-top: 90px;
   }
 `

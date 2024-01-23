@@ -10,6 +10,7 @@ import { Dashboard } from "./pages/Dashboard"
 import { LoginRegister } from "./pages/LoginRegister"
 import { Settings } from "./pages/Settings"
 import { Links } from "./pages/Links"
+import { ViewLoading } from "./components/View"
 
 import GlobalStyle from './globalStyles';
 import { NewUser } from "./pages/NewUser"
@@ -33,7 +34,7 @@ function App() {
   }, []);
 
   if (isFetching) {
-    return <h2>Carregando...</h2>;
+    return <ViewLoading>Carregando...</ViewLoading>;
   }
 
   return (
@@ -50,7 +51,7 @@ function App() {
           <ProtectedRoute user={user}>
             <Settings />
           </ProtectedRoute>} />
-          <Route index path="/link" element={
+        <Route index path="/link" element={
           <ProtectedRoute user={user}>
             <Links />
           </ProtectedRoute>} />
