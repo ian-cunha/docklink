@@ -62,7 +62,7 @@ justify-content: center;
 align-items: center;
 width: 100vw;
 height: 100vh;
-@media (max-width: 768px) {
+@media (max-width: 950px) {
   display: block;
   justify-content: center;
   align-items: center;
@@ -73,17 +73,33 @@ height: 100vh;
 `
 
 export const Block = styled.div`
-background: #535BF2;
 margin: 250px 100px;
 padding: 24px;
 border-radius: 20px;
 color: white;
 display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+color: #535BF2;
+@media (max-width: 768px) {
+  margin: 24px;
+  }
+`
+
+export const Items = styled.form`
+background: white;
+color: black;
+padding: 5px 20px;
+border-radius: 10px;
+width: 300px;
+display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: center;
+margin: 5px 0;
 @media (max-width: 768px) {
-  margin: 24px;
+  flex-direction: column;
   }
 `
 

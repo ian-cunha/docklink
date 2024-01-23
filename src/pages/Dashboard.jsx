@@ -1,4 +1,4 @@
-import { View, BlockView, Block } from "../components/View"
+import { View, BlockView, Block, Items } from "../components/View"
 
 import { Navigate } from 'react-router-dom'
 
@@ -21,7 +21,21 @@ export const Dashboard = () => {
       <NavBoard />
       <BlockView>
         <Block>
-          <h2>Informação será aqui</h2>
+          <Items>
+            <h2>Link 1</h2>
+          </Items>
+          <Items>
+            <h2>Link 2</h2>
+          </Items>
+          <Items>
+            <h2>Link 3</h2>
+          </Items>
+          <Items>
+            <h2>Link 4</h2>
+          </Items>
+          <Items>
+            <h2>Link 5</h2>
+          </Items>
         </Block>
         <Block>
           <Structure />

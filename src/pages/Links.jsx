@@ -22,7 +22,6 @@ export const Links = () => {
         <Block>
           <div>
             <h2>Link</h2>
-            <p>Bem-vindo de volta, {name}.</p>
           </div>
         </Block>
       </BlockView>

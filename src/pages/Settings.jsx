@@ -22,7 +22,6 @@ export const Settings = () => {
         <Block>
           <div>
             <h2>Configurações</h2>
-            <p>Bem-vindo de volta, {name}.</p>
           </div>
         </Block>
       </BlockView>
