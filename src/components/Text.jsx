@@ -50,3 +50,11 @@ font-weight: 300;
 font-size: 1.3em;
 margin-bottom: 45px;
 `
+
+export const TextProfile = styled.b`
+color: black;
+font-weight: 300;
+font-size: 1.3em;
+text-align: center;
+margin: 12px 0;
+`

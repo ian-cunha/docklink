@@ -88,3 +88,25 @@ display: flex;
   margin-top: 90px;
   }
 `
+
+export const ButtonProfile = styled.nav`
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  background: white;
+  border-radius: 30px;
+  z-index: 10;
+  right: 0;
+  margin-top: 90px;
+  padding: 5px 30px;
+@media (max-width: 768px) {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  background: white;
+  border-radius: 30px;
+  z-index: 10;
+  right: 0;
+  margin-top: 90px;
+  }
+`

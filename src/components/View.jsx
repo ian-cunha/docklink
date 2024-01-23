@@ -74,14 +74,17 @@ height: 100vh;
 
 export const Block = styled.div`
 background: #535BF2;
-padding: 60px;
-margin: 12px;
+margin: 250px 100px;
+padding: 24px;
 border-radius: 20px;
 color: white;
 display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: center;
+@media (max-width: 768px) {
+  margin: 24px;
+  }
 `
 
 export const ViewLoading = styled.div`
