@@ -29,10 +29,6 @@ input {
   
 }
 
-.bi {
-  border-radius: 50px;
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -46,6 +42,10 @@ body {
 ::selection {
     background-color: #535BF2;
     color: white;
+}
+
+button:focus, button:active {
+    outline:none;
 }
 
 .loader {
