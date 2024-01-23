@@ -6,6 +6,8 @@ import { auth } from "../config/firebase"
 
 import { NavBoard } from "../components/NavBoard";
 
+import { Structure } from "../components/Structure"
+
 export const Links = () => {
 
   const user = auth.currentUser;
@@ -23,6 +25,9 @@ export const Links = () => {
           <div>
             <h2>Link</h2>
           </div>
+        </Block>
+        <Block>
+          <Structure />
         </Block>
       </BlockView>
     </View>

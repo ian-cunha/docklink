@@ -6,6 +6,8 @@ import { auth } from "../config/firebase"
 
 import { NavBoard } from "../components/NavBoard";
 
+import { Structure } from "../components/Structure"
+
 export const Settings = () => {
 
   const user = auth.currentUser;
@@ -23,6 +25,9 @@ export const Settings = () => {
           <div>
             <h2>Configurações</h2>
           </div>
+        </Block>
+        <Block>
+          <Structure />
         </Block>
       </BlockView>
     </View>
