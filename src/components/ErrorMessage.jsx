@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
 export const ErrorMessage = styled.div`
-  box-shadow: 0 0 24px black;
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   background-color: red;
-  margin: 50px 200px 0 200px;
+  margin: 120px 200px 0 200px;
   border-radius: 50px;
   text-align: center;
   padding: 10px 0;
