@@ -28,8 +28,10 @@ export const Settings = () => {
       <NavBoard />
       <BlockView>
         <Block>
-          <h2>Configurações</h2>
-          <p>Bem-vindo de volta, {name}.</p>
+          <div>
+            <h2>Configurações</h2>
+            <p>Bem-vindo de volta, {name}.</p>
+          </div>
           <Button onClick={handleSignOut}>Sair</Button>
         </Block>
       </BlockView>

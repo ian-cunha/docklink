@@ -28,8 +28,10 @@ export const Links = () => {
       <NavBoard />
       <BlockView>
         <Block>
-          <h2>Link</h2>
-          <p>Bem-vindo de volta, {name}.</p>
+          <div>
+            <h2>Link</h2>
+            <p>Bem-vindo de volta, {name}.</p>
+          </div>
           <Button onClick={handleSignOut}>Sair</Button>
         </Block>
       </BlockView>
