@@ -21,10 +21,17 @@ background: #2C3078;
 
 export const ViewTop = styled.div`
 display: flex;
-flex-direction: column;
+flex-direction: row-reverse;
 justify-content: center;
+align-items: center;
 width: 100vw;
 height: 100vh;
+@media (max-width: 768px) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  }
 `
 
 export const ViewNew = styled.div`

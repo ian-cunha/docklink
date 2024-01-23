@@ -31,6 +31,11 @@ body {
   overflow-x: hidden;
 }
 
+::selection {
+    background-color: transparent;
+    color: none;
+}
+
 `;
 
 export default GlobalStyle;

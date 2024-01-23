@@ -20,15 +20,13 @@ width: 100vw;
   }
 `
 export const BlockImage = styled.img`
-position: absolute;
 width: 400px;
 z-index: 1;
-margin: 80px;
+margin: 24px;
 right: 0;
 @media (max-width: 768px) {
-  width: 80vw;
-  padding-top: 500px;
-  margin: 24px;
+  margin: 80px 24px 0 0;
+  width: 300px;
   }
 `
 

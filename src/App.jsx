@@ -13,8 +13,6 @@ import { Links } from "./pages/Links"
 
 import GlobalStyle from './globalStyles';
 import { NewUser } from "./pages/NewUser"
-import { ViewNew } from "./components/View"
-import { TextH2 } from "./components/Text"
 
 function App() {
   const [user, setUser] = useState(null);
@@ -35,9 +33,7 @@ function App() {
   }, []);
 
   if (isFetching) {
-    return <ViewNew>
-      <TextH2>Carregando...</TextH2>
-    </ViewNew>;
+    return <h2>Carregando...</h2>;
   }
 
   return (

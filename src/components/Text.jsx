@@ -8,9 +8,7 @@ font-weight: 600;
 color: white;
 text-align: left;
 width: 600px;
-margin: 0 80px 0 60px;
 @media (max-width: 768px) {
-  padding-bottom: 200px;
   margin: 24px;
   text-align: center;
   font-size: 4em;
