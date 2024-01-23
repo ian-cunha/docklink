@@ -8,7 +8,6 @@ border-width: 20px;
 height: 600px;
 width: 300px;
 background: #1C1C1C;
-cursor: pointer;
 `
 export const ViewStructure = styled.div`
 display: flex;
@@ -40,4 +39,5 @@ background: black;
 border-radius: 50px;
 padding: 2px 0;
 margin: 20px 5px;
+cursor: pointer;
 `

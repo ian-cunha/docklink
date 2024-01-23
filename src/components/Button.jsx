@@ -69,9 +69,6 @@ cursor: pointer;
 &:hover {
   color: #535BF2;
 };
-&:focus, &:active {
-    outline:none;
-};
 @media (max-width: 768px) {
   display: block;
   }
