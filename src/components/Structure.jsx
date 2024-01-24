@@ -37,24 +37,36 @@ export const Structure = () => {
   return (
     <ViewStructure>
       <PhoneStyle>
-        <ImageLinking src={photo} />
+        {dataBase.photo != 0 &&
+          <ImageLinking src={photo} />
+        }
         <Title>{name}</Title>
         <SubTitle>{email}</SubTitle>
-        <Blocks>
-          <Link href={dataBase.url1}>{dataBase.title1}</Link>
-        </Blocks>
-        <Blocks>
-          <Link href={dataBase.url2}>{dataBase.title2}</Link>
-        </Blocks>
-        <Blocks>
-          <Link href={dataBase.url3}>{dataBase.title3}</Link>
-        </Blocks>
-        <Blocks>
-          <Link href={dataBase.url4}>{dataBase.title4}</Link>
-        </Blocks>
-        <Blocks>
-          <Link href={dataBase.url5}>{dataBase.title5}</Link>
-        </Blocks>
+        {dataBase.title1 != 0 &&
+          <Blocks>
+            <Link href={dataBase.url1}>{dataBase.title1}</Link>
+          </Blocks>
+        }
+        {dataBase.title2 != 0 &&
+          <Blocks>
+            <Link href={dataBase.url2}>{dataBase.title2}</Link>
+          </Blocks>
+        }
+        {dataBase.title3 != 0 &&
+          <Blocks>
+            <Link href={dataBase.url3}>{dataBase.title3}</Link>
+          </Blocks>
+        }
+        {dataBase.title4 != 0 &&
+          <Blocks>
+            <Link href={dataBase.url4}>{dataBase.title4}</Link>
+          </Blocks>
+        }
+        {dataBase.title5 != 0 &&
+          <Blocks>
+            <Link href={dataBase.url5}>{dataBase.title5}</Link>
+          </Blocks>
+        }
       </PhoneStyle>
     </ViewStructure>
   )
