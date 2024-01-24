@@ -8,7 +8,7 @@ import { NavBoard } from "../components/NavBoard";
 
 import { Structure } from "../components/Structure"
 
-export const Links = () => {
+export const Appearance = () => {
 
   const user = auth.currentUser;
   const name = user.displayName;
@@ -23,7 +23,7 @@ export const Links = () => {
       <BlockView>
         <Block>
           <div>
-            <h2>Link</h2>
+            <h2>Aparência</h2>
           </div>
         </Block>
         <Block>

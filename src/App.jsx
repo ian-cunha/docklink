@@ -9,7 +9,7 @@ import { Home } from "./pages/Home";
 import { Dashboard } from "./pages/Dashboard"
 import { LoginRegister } from "./pages/LoginRegister"
 import { Settings } from "./pages/Settings"
-import { Links } from "./pages/Links"
+import { Appearance } from "./pages/Appearance"
 import { ViewLoading } from "./components/View"
 
 import GlobalStyle from './globalStyles';
@@ -51,9 +51,9 @@ function App() {
           <ProtectedRoute user={user}>
             <Settings />
           </ProtectedRoute>} />
-        <Route index path="/link" element={
+        <Route index path="/appearance" element={
           <ProtectedRoute user={user}>
-            <Links />
+            <Appearance />
           </ProtectedRoute>} />
         <Route index path="/welcome" element={
           <ProtectedRoute user={user}>

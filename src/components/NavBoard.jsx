@@ -42,8 +42,8 @@ export const NavBoard = () => {
     <NavBar>
       <Menu onClick={dotBar} className="bi bi-three-dots" />
       <ButtonBar id="nav">
-        <Button className="bi bi-app" onClick={() => navigate('/dashboard')}> Aparência</Button>
-        <Button className="bi bi-link-45deg" onClick={() => navigate('/link')}> Link</Button>
+        <Button className="bi bi-link-45deg" onClick={() => navigate('/dashboard')}> Links</Button>
+        <Button className="bi bi-app" onClick={() => navigate('/appearance')}> Aparência</Button>
         <Button className="bi bi-gear" onClick={() => navigate('/settings')}> Configurações</Button>
       </ButtonBar>
       <Profile onClick={profileBar} className="bi bi-person-circle" />
