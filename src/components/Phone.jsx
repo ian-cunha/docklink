@@ -36,11 +36,17 @@ padding: 0 15px;
 `
 
 export const Blocks = styled.div`
-background: black;
-border-radius: 50px;
 padding: 2px 0;
-margin: 20px 5px;
-cursor: pointer;
+margin: 5px 5px;
+`
+
+export const Link = styled.a`
+color: white;
+text-decoration: none;
+background: black;
+padding: 15px 0;
+display: block;
+border-radius: 50px;
 &:hover {
   background: #535BF2;
   color: white;

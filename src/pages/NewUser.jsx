@@ -1,9 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button } from "../components/Button"
 import { ViewNew } from "../components/View";
 import { Message } from '../components/Message';
 
 import { updateProfile } from "firebase/auth";
-import { auth } from "../config/firebase"
+import { auth, storeApp } from "../config/firebase"
+import { doc, setDoc } from "firebase/firestore";
+
+import { useEffect } from "react"
 
 import { Navigate } from 'react-router-dom'
 
@@ -18,7 +22,35 @@ export const NewUser = () => {
   const [message, setMessage] = useState(true);
 
   const user = auth.currentUser;
+  const uid = user.uid;
   const name = user.displayName;
+  const email = user.email;
+  const photo = user.photoURL;
+
+  const newUser = async () => {
+    if (name === null) {
+      await setDoc(doc(storeApp, "profiles", uid), {
+        lastUpdate: new Date(),
+        title1: '',
+        title2: '',
+        title3: '',
+        title4: '',
+        title5: '',
+        url1: '',
+        url2: '',
+        url3: '',
+        url4: '',
+        url5: '',
+        name: name,
+        photo: photo,
+        email: email,
+      });
+    }
+  }
+
+  useEffect(() => {
+    newUser()
+  }, [])
 
   const handleUpdateName = async (event) => {
     if (displayName != 0) {

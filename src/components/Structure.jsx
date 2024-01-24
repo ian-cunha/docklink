@@ -6,7 +6,7 @@ import { doc, getDoc } from "firebase/firestore"
 
 import { useEffect, useState } from "react"
 
-import { PhoneStyle, ViewStructure, ImageLinking, Title, SubTitle, Blocks } from "./Phone"
+import { Link, PhoneStyle, ViewStructure, ImageLinking, Title, SubTitle, Blocks } from "./Phone"
 
 export const Structure = () => {
 
@@ -19,7 +19,7 @@ export const Structure = () => {
   const [dataBase, setDataBase] = useState('')
 
   const getDataBase = async () => {
-    const docRef = doc(storeApp, "users", uid)
+    const docRef = doc(storeApp, "profiles", uid)
     const docSnap = await getDoc(docRef)
 
     if (docSnap.exists()) {
@@ -41,19 +41,19 @@ export const Structure = () => {
         <Title>{name}</Title>
         <SubTitle>{email}</SubTitle>
         <Blocks>
-          <p>GitHub</p>
+          <Link href={dataBase.url1}>{dataBase.title1}</Link>
         </Blocks>
         <Blocks>
-          <p>Instagram</p>
+          <Link href={dataBase.url2}>{dataBase.title2}</Link>
         </Blocks>
         <Blocks>
-          <p>Linkedin</p>
+          <Link href={dataBase.url3}>{dataBase.title3}</Link>
         </Blocks>
         <Blocks>
-          <p>Behance</p>
+          <Link href={dataBase.url4}>{dataBase.title4}</Link>
         </Blocks>
         <Blocks>
-          <p>Dockfolio</p>
+          <Link href={dataBase.url5}>{dataBase.title5}</Link>
         </Blocks>
       </PhoneStyle>
     </ViewStructure>

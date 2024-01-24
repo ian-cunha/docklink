@@ -45,6 +45,7 @@ export const Settings = () => {
       }).catch((error) => {
         alert(error)
       });
+      
     } else {
       event.preventDefault()
 
