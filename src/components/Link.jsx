@@ -13,6 +13,14 @@ height: 100vh;
   }
 `
 
+export const ViewStructure = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+background: black;
+`
+
 export const BlockBtn = styled.div`
 padding: 2px 0;
 margin: 5px 5px;
