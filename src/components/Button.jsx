@@ -20,6 +20,9 @@ cursor: pointer;
 `
 
 export const ButtonSubmit = styled.button`
+transition: 0.6s all; 
+animation: zoomIn;
+animation-duration: 1s;
 border-radius: 100px;
 background: #535BF2;
 padding: 10px 30px;
