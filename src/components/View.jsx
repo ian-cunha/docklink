@@ -100,7 +100,7 @@ align-items: center;
 justify-content: center;
 margin: 5px 0;
 @media (max-width: 1100px) {
-  flex-direction: column;
+  flex-direction: row;
   width: 100%;
   }
 `
@@ -134,7 +134,7 @@ export const ViewButtons = styled.div`
 display: flex;
 flex-direction: column;
 @media (max-width: 1100px) {
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
   }

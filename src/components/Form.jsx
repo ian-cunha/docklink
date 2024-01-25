@@ -55,7 +55,7 @@ font-weight: 600;
 border: none;
 color: black;
 @media (max-width: 1100px) {
-  width: 65vw;
+  width: 53vw;
   }
 `
 
