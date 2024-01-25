@@ -1,10 +1,10 @@
 ![Logo do projeto](https://docklink.vercel.app/assets/logo-aAGSvuuS.svg)
 
 # Docklink
-Centralize suas conexões em um único lugar!
+Centralize suas conexões em um único lugar! Docklink é um aplicativo que permite criar e compartilhar links personalizados com seus contatos, redes sociais e plataformas de mídia.
 
 ## 🔥 Introdução
-O Docklink é um app que usa React, JavaScript, Vite, Firebase e NoSQL.
+O Docklink é um app feito em React, JavaScript, Vite, Firebase e NoSQL.
 
 [Acessar site](https://docklink.vercel.app/)
 
