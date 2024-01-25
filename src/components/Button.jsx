@@ -28,8 +28,10 @@ font-size: 1.5em;
 width: 600px;
 font-weight: 600;
 cursor: pointer;
+box-shadow: 0 5px black;
 &:hover {
-  background: black;
+  background: white;
+  color: #535BF2;
 }
 @media (max-width: 1300px) {
   width: 400px;
@@ -86,6 +88,7 @@ display: flex;
   left: 0;
   right: 0;
   margin-top: 90px;
+  box-shadow: 0 10px black;
   }
 `
 
@@ -98,7 +101,8 @@ export const ButtonProfile = styled.nav`
   z-index: 10;
   right: 0;
   margin-top: 90px;
-  padding: 5px 30px;
+  padding: 5px 5px;
+  box-shadow: 5px 10px black;
 @media (max-width: 768px) {
   display: none;
   flex-direction: column;

@@ -82,7 +82,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
-color: #535BF2;
+color: white;
 @media (max-width: 768px) {
   margin: 24px;
   }
@@ -98,7 +98,8 @@ display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: center;
-margin: 5px 0;
+margin: 8px 0;
+box-shadow: 5px 10px black;
 @media (max-width: 1100px) {
   flex-direction: row;
   width: 100%;

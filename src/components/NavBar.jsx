@@ -10,4 +10,5 @@ display: flex;
 justify-content: space-between;
 position: fixed;
 z-index: 5;
+box-shadow: 5px 10px black;
 `
