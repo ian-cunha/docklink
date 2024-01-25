@@ -74,6 +74,8 @@ height: 100vh;
 `
 
 export const Block = styled.div`
+animation: bounceInDown;
+animation-duration: 1s;
 margin: 250px 50px;
 padding: 24px;
 border-radius: 20px;

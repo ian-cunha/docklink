@@ -12,6 +12,7 @@ border-style: solid;
 border-color: transparent;
 cursor: pointer;
 &:hover {
+  transition: 0.6s all; 
   background: #535BF2;
   border-color: rgba(255, 255, 255, 0.87);
   border-style: solid;
@@ -53,6 +54,7 @@ color: black;
 z-index: 1;
 cursor: pointer;
 &:hover {
+  transition: 0.6s all; 
   color: #535BF2;
 };
 `
@@ -79,6 +81,8 @@ cursor: pointer;
 export const ButtonBar = styled.nav`
 display: flex;
 @media (max-width: 768px) {
+  animation: bounceInDown;
+  animation-duration: 1s;
   display: none;
   flex-direction: column;
   position: absolute;
@@ -103,6 +107,8 @@ export const ButtonProfile = styled.nav`
   margin-top: 90px;
   padding: 5px 5px;
   box-shadow: 5px 10px black;
+  animation: bounceInDown;
+  animation-duration: 1s;
 @media (max-width: 768px) {
   display: none;
   flex-direction: column;
