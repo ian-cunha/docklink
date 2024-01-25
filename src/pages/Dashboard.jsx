@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { View, BlockView, Block, Items, ViewBox } from "../components/View"
+import { View, BlockView, Block, Items, ViewBox, ViewButtons } from "../components/View"
 import { Navigate } from 'react-router-dom'
 import { auth, storeApp } from "../config/firebase"
 import { doc, updateDoc, getDoc, deleteField } from "firebase/firestore";
@@ -183,8 +183,10 @@ export const Dashboard = () => {
               </InputView>
             </ViewBox>
             <ViewBox>
-              <ButtonBox onClick={updateLink1} type="submit" className="bi bi-cloud-upload" />
-              <ButtonBox onClick={deleteLink1} type="button" className="bi bi-trash3" />
+              <ViewButtons>
+                <ButtonBox onClick={updateLink1} type="submit" className="bi bi-cloud-upload" />
+                <ButtonBox onClick={deleteLink1} type="button" className="bi bi-trash3" />
+              </ViewButtons>
             </ViewBox>
           </Items>
           <Items>
@@ -199,8 +201,10 @@ export const Dashboard = () => {
               </InputView>
             </ViewBox>
             <ViewBox>
-              <ButtonBox onClick={updateLink2} type="submit" className="bi bi-cloud-upload" />
-              <ButtonBox onClick={deleteLink2} type="button" className="bi bi-trash3" />
+              <ViewButtons>
+                <ButtonBox onClick={updateLink2} type="submit" className="bi bi-cloud-upload" />
+                <ButtonBox onClick={deleteLink2} type="button" className="bi bi-trash3" />
+              </ViewButtons>
             </ViewBox>
           </Items>
           <Items>
@@ -215,8 +219,10 @@ export const Dashboard = () => {
               </InputView>
             </ViewBox>
             <ViewBox>
-              <ButtonBox onClick={updateLink3} type="submit" className="bi bi-cloud-upload" />
-              <ButtonBox onClick={deleteLink3} type="button" className="bi bi-trash3" />
+              <ViewButtons>
+                <ButtonBox onClick={updateLink3} type="submit" className="bi bi-cloud-upload" />
+                <ButtonBox onClick={deleteLink3} type="button" className="bi bi-trash3" />
+              </ViewButtons>
             </ViewBox>
           </Items>
           <Items>
@@ -231,8 +237,10 @@ export const Dashboard = () => {
               </InputView>
             </ViewBox>
             <ViewBox>
-              <ButtonBox onClick={updateLink4} type="submit" className="bi bi-cloud-upload" />
-              <ButtonBox onClick={deleteLink4} type="button" className="bi bi-trash3" />
+              <ViewButtons>
+                <ButtonBox onClick={updateLink4} type="submit" className="bi bi-cloud-upload" />
+                <ButtonBox onClick={deleteLink4} type="button" className="bi bi-trash3" />
+              </ViewButtons>
             </ViewBox>
           </Items>
           <Items>
@@ -247,8 +255,10 @@ export const Dashboard = () => {
               </InputView>
             </ViewBox>
             <ViewBox>
-              <ButtonBox onClick={updateLink5} type="submit" className="bi bi-cloud-upload" />
-              <ButtonBox onClick={deleteLink5} type="button" className="bi bi-trash3" />
+              <ViewButtons>
+                <ButtonBox onClick={updateLink5} type="submit" className="bi bi-cloud-upload" />
+                <ButtonBox onClick={deleteLink5} type="button" className="bi bi-trash3" />
+              </ViewButtons>
             </ViewBox>
           </Items>
         </Block>

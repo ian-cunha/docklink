@@ -60,13 +60,14 @@ export const BlockView = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
+margin-top: 30px;
 width: 100vw;
 height: 100vh;
-@media (max-width: 950px) {
+@media (max-width: 1150px) {
   display: block;
   justify-content: center;
   align-items: center;
-  margin-top: 120px;
+  margin-top: 100px;
   width: 100vw;
   height: 100vh;
   }
@@ -125,6 +126,16 @@ justify-content: center;
 margin: 5px 0;
 @media (max-width: 1100px) {
   flex-direction: column;
+  width: 100%;
+  }
+`
+
+export const ViewButtons = styled.div`
+display: flex;
+flex-direction: column;
+@media (max-width: 1100px) {
+  flex-direction: row;
+  justify-content: center;
   width: 100%;
   }
 `
