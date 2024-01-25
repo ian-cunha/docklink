@@ -1,16 +1,35 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useNavigate } from 'react-router-dom'
-
 import { Button, ButtonBar, Profile, Menu, ButtonProfile } from "../components/Button"
 import { NavBar } from "../components/NavBar";
 import { TextProfile } from './Text';
-
 import { signOut } from "firebase/auth"
-import { auth } from "../config/firebase"
+import { auth, storeApp } from "../config/firebase"
+import { doc, getDoc } from "firebase/firestore";
+import { useState, useEffect } from "react";
 
 export const NavBoard = () => {
 
   const user = auth.currentUser;
-  const name = user.displayName;
+  const uid = user.uid;
+
+  const [dataBase, setDataBase] = useState('')
+
+  const getDataBase = async () => {
+    const docRef = doc(storeApp, "users", uid)
+    const docSnap = await getDoc(docRef)
+
+    if (docSnap.exists()) {
+      setDataBase(docSnap.data())
+      console.log(docSnap.data())
+    } else {
+      console.log("Sem dados!")
+    }
+  }
+
+  useEffect(() => {
+    getDataBase()
+  }, [])
 
   const handleSignOut = () => {
     signOut(auth)
@@ -48,8 +67,9 @@ export const NavBoard = () => {
       </ButtonBar>
       <Profile onClick={profileBar} className="bi bi-person-circle" />
       <ButtonProfile id="nav-profile">
-        <TextProfile>Olá, {name}.</TextProfile>
-        <Button onClick={handleSignOut}>Sair</Button>
+        <TextProfile>Olá, {dataBase.name}.</TextProfile>
+        <Button className='bi bi-share' onClick={() => navigate('/'+ uid)}> Compartilhar</Button>
+        <Button className='bi bi-x-circle' onClick={handleSignOut}> Sair</Button>
       </ButtonProfile>
     </NavBar>
   )

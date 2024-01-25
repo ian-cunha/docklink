@@ -12,14 +12,11 @@ export const Structure = () => {
 
   const user = auth.currentUser;
   const uid = user.uid;
-  const name = user.displayName;
-  const email = user.email;
-  const photo = user.photoURL;
 
   const [dataBase, setDataBase] = useState('')
 
   const getDataBase = async () => {
-    const docRef = doc(storeApp, "profiles", uid)
+    const docRef = doc(storeApp, "users", uid)
     const docSnap = await getDoc(docRef)
 
     if (docSnap.exists()) {
@@ -38,10 +35,10 @@ export const Structure = () => {
     <ViewStructure>
       <PhoneStyle>
         {dataBase.photo != 0 &&
-          <ImageLinking src={photo} />
+          <ImageLinking src={dataBase.photo} />
         }
-        <Title>{name}</Title>
-        <SubTitle>{email}</SubTitle>
+        <Title>{dataBase.name}</Title>
+        <SubTitle>{dataBase.email}</SubTitle>
         {dataBase.title1 != 0 &&
           <Blocks>
             <Link href={dataBase.url1}>{dataBase.title1}</Link>

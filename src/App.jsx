@@ -14,6 +14,7 @@ import { ViewLoading } from "./components/View"
 
 import GlobalStyle from './globalStyles';
 import { NewUser } from "./pages/NewUser"
+import { Share } from "./pages/Share"
 
 function App() {
   const [user, setUser] = useState(null);
@@ -42,6 +43,7 @@ function App() {
       <GlobalStyle />
       <Routes>
         <Route index path="/" element={<Home />} />
+        <Route index path="/:uid" element={<Share />} />
         <Route index path="/login" element={<LoginRegister user={user} />} />
         <Route index path="/dashboard" element={
           <ProtectedRoute user={user}>

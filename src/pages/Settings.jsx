@@ -1,51 +1,65 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-undef */
 import { View, BlockView, Block } from "../components/View"
 import { Message } from "../components/Message";
 import { ErrorMessage } from "../components/ErrorMessage";
 
 import { Navigate } from 'react-router-dom'
-import { useState } from "react"
+import { useState, useEffect } from "react";
 
 import { NavBoard } from "../components/NavBoard";
 
 import { Structure } from "../components/Structure"
 
-import { updateProfile } from "firebase/auth";
-
-import { auth } from "../config/firebase"
+import { auth, storeApp } from "../config/firebase"
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { Button } from "../components/Button";
 import { InputLogin } from "../components/Form";
 
 export const Settings = () => {
 
-  const [displayName, setDisplayName] = useState('')
+  const user = auth.currentUser;
+  const uid = user.uid;
+
+  const [dataBase, setDataBase] = useState('')
+
+  const getDataBase = async () => {
+    const docRef = doc(storeApp, "users", uid)
+    const docSnap = await getDoc(docRef)
+
+    if (docSnap.exists()) {
+      setDataBase(docSnap.data())
+      console.log(docSnap.data())
+    } else {
+      console.log("Sem dados!")
+    }
+  }
+
+  useEffect(() => {
+    getDataBase()
+  }, [])
+
+  const [nameDisplay, setNameDisplay] = useState('')
   const [newPhoto, setNewPhoto] = useState('')
-  const handleDisplayName = (event) => setDisplayName(event.target.value)
+  const handleDisplayName = (event) => setNameDisplay(event.target.value)
   const handleNewPhoto = (event) => setNewPhoto(event.target.value)
 
   const [message, setMessage] = useState(true);
 
-  const user = auth.currentUser;
-  const name = user.displayName;
-  const photo = user.photoURL;
-
   const handleUpdateName = async (event) => {
-    if (displayName != 0) {
+    if (nameDisplay != 0) {
       event.preventDefault()
 
-      updateProfile(auth.currentUser, {
-        displayName: displayName,
-      }).then(() => {
-        setMessage(
-          <Message>Nome atualizado!</Message>
-        )
-        setTimeout(function () {
-          setMessage(false)
-        }, 2000)
-      }).catch((error) => {
-        alert(error)
+      await updateDoc(doc(storeApp, "users", uid), {
+        name: nameDisplay,
       });
-      
+      setMessage(
+        <Message>Nome atualizado!</Message>
+      )
+      setTimeout(function () {
+        setMessage(false)
+      }, 2000)
+      window.location.reload(false);
     } else {
       event.preventDefault()
 
@@ -59,21 +73,19 @@ export const Settings = () => {
   }
 
   const handleUpdatePhoto = async (event) => {
-    if (photo != 0) {
+    if (photo) {
       event.preventDefault()
 
-      updateProfile(auth.currentUser, {
-        photoURL: newPhoto,
-      }).then(() => {
-        setMessage(
-          <Message>Foto atualizado!</Message>
-        )
-        setTimeout(function () {
-          setMessage(false)
-        }, 2000)
-      }).catch((error) => {
-        alert(error)
+      await updateDoc(doc(storeApp, "users", uid), {
+        photo: newPhoto,
       });
+      setMessage(
+        <Message>Foto atualizada!</Message>
+      )
+      setTimeout(function () {
+        setMessage(false)
+      }, 2000)
+      window.location.reload(false);
     } else {
       event.preventDefault()
 
@@ -86,7 +98,7 @@ export const Settings = () => {
     }
   }
 
-  if (name === null) {
+  if (dataBase.name === null) {
     return <Navigate to='/welcome'></Navigate>
   }
 
@@ -98,9 +110,9 @@ export const Settings = () => {
         <Block>
           <div>
             <h2>Configurações</h2>
-            <InputLogin type="name" id="name" defaultValue={name} placeholder="Nome" onChange={handleDisplayName} />
+            <InputLogin type="name" id="name" defaultValue={dataBase.name} placeholder="Nome" onChange={handleDisplayName} />
             <Button className="bi bi-textarea-t" onClick={handleUpdateName}> Aplicar</Button>
-            <InputLogin type="url" id="photo" defaultValue={photo} placeholder="Foto de perfil" onChange={handleNewPhoto} />
+            <InputLogin type="url" id="photo" defaultValue={dataBase.photo} placeholder="Foto de perfil" onChange={handleNewPhoto} />
             <Button className="bi bi-image" onClick={handleUpdatePhoto}> Aplicar</Button>
           </div>
         </Block>

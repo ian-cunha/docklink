@@ -19,7 +19,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword
 } from "firebase/auth"
-import { auth } from "../config/firebase"
+import { auth, storeApp } from "../config/firebase"
+import { doc, setDoc } from "firebase/firestore";
 
 export const LoginRegister = ({ user }) => {
 
@@ -37,6 +38,15 @@ export const LoginRegister = ({ user }) => {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
+
+          const uid = user.uid;
+          const newUser = async () => {
+            await setDoc(doc(storeApp, "users", uid), {
+              name: null,
+            });
+          }
+          newUser()
+          
           console.log(user)
         })
         .catch((error) => {

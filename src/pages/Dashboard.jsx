@@ -1,22 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { View, BlockView, Block, Items, ViewBox } from "../components/View"
-
 import { Navigate } from 'react-router-dom'
-
 import { auth, storeApp } from "../config/firebase"
 import { doc, updateDoc, getDoc } from "firebase/firestore";
-
 import { Structure } from "../components/Structure"
 import { NavBoard } from "../components/NavBoard";
 import { InputBox, InputView } from "../components/Form";
 import { ButtonBox } from "../components/Button";
-
 import { useState, useEffect } from "react";
 
 export const Dashboard = () => {
 
   const user = auth.currentUser;
-  const name = user.displayName;
   const uid = user.uid;
 
   const [title1, setTitle1] = useState('')
@@ -52,52 +47,57 @@ export const Dashboard = () => {
   const updateLink1 = async (event) => {
     event.preventDefault()
 
-    await updateDoc(doc(storeApp, "profiles", uid), {
+    await updateDoc(doc(storeApp, "users", uid), {
       title1: title1,
       url1: url1,
     });
+    window.location.reload(false);
   }
 
   const updateLink2 = async (event) => {
     event.preventDefault()
 
-    await updateDoc(doc(storeApp, "profiles", uid), {
+    await updateDoc(doc(storeApp, "users", uid), {
       title2: title2,
       url2: url2,
     });
+    window.location.reload(false);
   }
 
   const updateLink3 = async (event) => {
     event.preventDefault()
 
-    await updateDoc(doc(storeApp, "profiles", uid), {
+    await updateDoc(doc(storeApp, "users", uid), {
       title3: title3,
       url3: url3,
     });
+    window.location.reload(false);
   }
 
   const updateLink4 = async (event) => {
     event.preventDefault()
 
-    await updateDoc(doc(storeApp, "profiles", uid), {
+    await updateDoc(doc(storeApp, "users", uid), {
       title4: title4,
       url4: url4,
     });
+    window.location.reload(false);
   }
 
   const updateLink5 = async (event) => {
     event.preventDefault()
 
-    await updateDoc(doc(storeApp, "profiles", uid), {
+    await updateDoc(doc(storeApp, "users", uid), {
       title5: title5,
       url5: url5,
     });
+    window.location.reload(false);
   }
 
   const [dataBase, setDataBase] = useState('')
 
   const getDataBase = async () => {
-    const docRef = doc(storeApp, "profiles", uid)
+    const docRef = doc(storeApp, "users", uid)
     const docSnap = await getDoc(docRef)
 
     if (docSnap.exists()) {
@@ -112,7 +112,7 @@ export const Dashboard = () => {
     getDataBase()
   }, [])
 
-  if (name === null) {
+  if (dataBase.name === null) {
     return <Navigate to='/welcome'></Navigate>
   }
 
