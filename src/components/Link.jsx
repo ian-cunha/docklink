@@ -22,6 +22,8 @@ background: black;
 `
 
 export const BlockBtn = styled.div`
+animation: pulse;
+animation-duration: 1s;
 padding: 2px 0;
 margin: 5px 5px;
 width: 500px;

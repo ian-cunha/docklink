@@ -7,6 +7,8 @@ padding: 18px;
 `
 
 export const LogoLogin = styled.img`
+animation: fadeInDown;
+animation-duration: 1s;
 width: 200px;
 height: auto;
 padding: 18px;
@@ -20,6 +22,8 @@ width: 100vw;
   }
 `
 export const BlockImage = styled.img`
+animation: fadeInRight;
+animation-duration: 2s;
 width: 400px;
 z-index: 1;
 margin: 24px;

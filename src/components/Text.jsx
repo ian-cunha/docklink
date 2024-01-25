@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const TextTop = styled.h2`
+animation: fadeInLeft;
+animation-duration: 2s;
 z-index: 1;
 font-size: 4.5em;
 line-height: 80px;
@@ -45,7 +47,9 @@ color: #535BF2;
 `
 
 export const LegendLogin = styled.b`
-color: blac;
+animation: zoomIn;
+animation-duration: 1s;
+color: black;
 font-weight: 300;
 font-size: 1.3em;
 margin-bottom: 45px;

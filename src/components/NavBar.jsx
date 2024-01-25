@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const NavBar = styled.nav`
+animation: fadeInDown;
+animation-duration: 1s;
 margin: 24px 0 0 0;
 background: white;
 width: 95vw;

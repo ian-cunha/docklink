@@ -13,6 +13,8 @@ height: 100vh;
 `
 
 export const FieldLogin = styled.fieldset`
+animation: zoomIn;
+animation-duration: 1s;
 display: flex;
 flex-direction: column;
 justify-content: center;
