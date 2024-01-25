@@ -28,6 +28,8 @@ export const Share = () => {
     }
   }
 
+  document.title = dataBase.name
+
   useEffect(() => {
     getDataBase()
   }, [])
