@@ -29,6 +29,8 @@ z-index: 1;
 margin: 24px;
 right: 0;
 @media (max-width: 768px) {
+  animation: zoomInDown;
+  animation-duration: 2s;
   margin: 80px 24px 0 0;
   width: 300px;
   }

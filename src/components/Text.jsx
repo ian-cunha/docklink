@@ -18,6 +18,8 @@ width: 600px;
   line-height: 70px;
   }
   @media (max-width: 550px) {
+  animation: zoomInUp;
+  animation-duration: 2s;
   font-size: 2.5em;
   width: 90vw;
   line-height: 35px;
