@@ -42,20 +42,8 @@ export const NewUser = () => {
 
     await setDoc(doc(storeApp, "users", uid), {
       started: new Date(),
-      title1: '',
-      title2: '',
-      title3: '',
-      title4: '',
-      title5: '',
-      url1: '',
-      url2: '',
-      url3: '',
-      url4: '',
-      url5: '',
       name: nameDisplay,
-      photo: '',
       email: email,
-      tel: '',
     });
 
     window.location.reload(false);

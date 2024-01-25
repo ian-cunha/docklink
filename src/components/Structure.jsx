@@ -34,32 +34,32 @@ export const Structure = () => {
   return (
     <ViewStructure>
       <PhoneStyle>
-        {dataBase.photo != 0 &&
+        {dataBase.photo != null &&
           <ImageLinking src={dataBase.photo} />
         }
         <Title>{dataBase.name}</Title>
         <SubTitle>{dataBase.email}</SubTitle>
-        {dataBase.title1 != 0 &&
+        {dataBase.title1 != null &&
           <Blocks>
             <Link href={dataBase.url1}>{dataBase.title1}</Link>
           </Blocks>
         }
-        {dataBase.title2 != 0 &&
+        {dataBase.title2 != null &&
           <Blocks>
             <Link href={dataBase.url2}>{dataBase.title2}</Link>
           </Blocks>
         }
-        {dataBase.title3 != 0 &&
+        {dataBase.title3 != null &&
           <Blocks>
             <Link href={dataBase.url3}>{dataBase.title3}</Link>
           </Blocks>
         }
-        {dataBase.title4 != 0 &&
+        {dataBase.title4 != null &&
           <Blocks>
             <Link href={dataBase.url4}>{dataBase.title4}</Link>
           </Blocks>
         }
-        {dataBase.title5 != 0 &&
+        {dataBase.title5 != null &&
           <Blocks>
             <Link href={dataBase.url5}>{dataBase.title5}</Link>
           </Blocks>

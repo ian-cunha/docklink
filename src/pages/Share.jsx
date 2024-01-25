@@ -37,32 +37,32 @@ export const Share = () => {
   return (
     <View>
       {dataBase !== '' && <ViewStructure>
-        {dataBase.photo != 0 &&
+        {dataBase.photo != null &&
           <ImageLinking src={dataBase.photo} />
         }
         <Title>{dataBase.name}</Title>
         <SubTitle>{dataBase.email}</SubTitle>
-        {dataBase.title1 != 0 &&
+        {dataBase.title1 != null &&
           <BlockBtn>
             <LinkBtn href={dataBase.url1}>{dataBase.title1}</LinkBtn>
           </BlockBtn>
         }
-        {dataBase.title2 != 0 &&
+        {dataBase.title2 != null &&
           <BlockBtn>
             <LinkBtn href={dataBase.url2}>{dataBase.title2}</LinkBtn>
           </BlockBtn>
         }
-        {dataBase.title3 != 0 &&
+        {dataBase.title3 != null &&
           <BlockBtn>
             <LinkBtn href={dataBase.url3}>{dataBase.title3}</LinkBtn>
           </BlockBtn>
         }
-        {dataBase.title4 != 0 &&
+        {dataBase.title4 != null &&
           <BlockBtn>
             <LinkBtn href={dataBase.url4}>{dataBase.title4}</LinkBtn>
           </BlockBtn>
         }
-        {dataBase.title5 != 0 &&
+        {dataBase.title5 != null &&
           <BlockBtn>
             <LinkBtn href={dataBase.url5}>{dataBase.title5}</LinkBtn>
           </BlockBtn>

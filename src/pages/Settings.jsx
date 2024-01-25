@@ -12,7 +12,7 @@ import { NavBoard } from "../components/NavBoard";
 import { Structure } from "../components/Structure"
 
 import { auth, storeApp } from "../config/firebase"
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, deleteField } from "firebase/firestore";
 import { Button } from "../components/Button";
 import { InputLogin } from "../components/Form";
 
@@ -39,8 +39,8 @@ export const Settings = () => {
     getDataBase()
   }, [])
 
-  const [nameDisplay, setNameDisplay] = useState('')
-  const [newPhoto, setNewPhoto] = useState('')
+  const [nameDisplay, setNameDisplay] = useState(dataBase.name)
+  const [newPhoto, setNewPhoto] = useState(dataBase.photo)
   const handleDisplayName = (event) => setNameDisplay(event.target.value)
   const handleNewPhoto = (event) => setNewPhoto(event.target.value)
 
@@ -98,6 +98,15 @@ export const Settings = () => {
     }
   }
 
+  const deletePhoto = async (event) => {
+    event.preventDefault()
+
+    await updateDoc(doc(storeApp, "users", uid), {
+      photo: deleteField(),
+    });
+    window.location.reload(false);
+  }
+
   if (dataBase.name === null) {
     return <Navigate to='/welcome'></Navigate>
   }
@@ -110,10 +119,11 @@ export const Settings = () => {
         <Block>
           <div>
             <h2>Configurações</h2>
-            <InputLogin type="name" id="name" defaultValue={dataBase.name} placeholder="Nome" onChange={handleDisplayName} />
+            <InputLogin type="name" id="name" defaultValue={dataBase.name} value={nameDisplay} placeholder="Nome" onChange={handleDisplayName} />
             <Button className="bi bi-textarea-t" onClick={handleUpdateName}> Aplicar</Button>
-            <InputLogin type="url" id="photo" defaultValue={dataBase.photo} placeholder="Foto de perfil" onChange={handleNewPhoto} />
+            <InputLogin type="url" id="photo" defaultValue={dataBase.photo} value={newPhoto} placeholder="Foto de perfil" onChange={handleNewPhoto} />
             <Button className="bi bi-image" onClick={handleUpdatePhoto}> Aplicar</Button>
+            <Button onClick={deletePhoto} type="button" className="bi bi-trash3"> Remover</Button>
           </div>
         </Block>
         <Block>
