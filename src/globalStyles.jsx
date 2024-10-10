@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
 
   color-scheme: light dark;
   color: #242424;
-  background-color: #535BF2;
+  background-color: #2D3376;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

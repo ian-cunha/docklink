@@ -24,7 +24,7 @@ width: 100vw;
 export const BlockImage = styled.img`
 animation: fadeInRight;
 animation-duration: 2s;
-width: 400px;
+width: 250px;
 z-index: 1;
 margin: 24px;
 right: 0;
