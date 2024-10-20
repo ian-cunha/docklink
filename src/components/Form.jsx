@@ -54,10 +54,10 @@ border-radius: 5px;
 margin: 10px;
 font-size: 1em;
 font-weight: 600;
-border: none;
+border: dashed 1px;
 color: black;
 @media (max-width: 1100px) {
-  width: 42vw;
+  width: auto;
   }
 `
 

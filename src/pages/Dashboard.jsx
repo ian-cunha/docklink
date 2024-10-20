@@ -99,7 +99,6 @@ export const Dashboard = () => {
             <Items key={index}>
               <ViewBox>
                 <InputView>
-                  <i className="bi bi-pen"></i>
                   <InputBox
                     value={link.title}
                     onChange={(e) => handleInputChange(index, 'title', e.target.value)}
@@ -108,7 +107,6 @@ export const Dashboard = () => {
                   />
                 </InputView>
                 <InputView>
-                  <i className="bi bi-pen"></i>
                   <InputBox
                     value={link.url}
                     onChange={(e) => handleInputChange(index, 'url', e.target.value)}

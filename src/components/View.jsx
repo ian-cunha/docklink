@@ -93,7 +93,7 @@ color: white;
 export const Items = styled.form`
 background: white;
 color: black;
-padding: 5px 20px;
+padding: 5px 10px;
 border-radius: 10px;
 width: 650px;
 display: flex;
@@ -120,7 +120,7 @@ export const ViewLoading = styled.div`
 `
 
 export const ViewBox = styled.div`
-padding: 5px 20px;
+padding: 5px 0;
 border-radius: 10px;
 display: flex;
 flex-direction: column;
