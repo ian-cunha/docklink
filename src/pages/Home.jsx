@@ -13,7 +13,7 @@ const Footer = styled.footer`
   background-color: #141740; /* Cor de fundo do footer */
   color: white;
   text-align: center;
-  padding: 20px;
+  padding: 20px 0;
   position: relative;
   bottom: 0;
   width: 100%;
@@ -40,7 +40,7 @@ export const Home = () => {
       </ViewTop>
 
       <Footer>
-        <FooterText>&copy; {new Date().getFullYear()} DockLink. Todos os direitos reservados.</FooterText>
+        <FooterText>&copy; {new Date().getFullYear()} DockLink. Powered by DockStar.</FooterText>
         <FooterText>Crie, personalize e compartilhe seus links de forma fácil!</FooterText>
       </Footer>
     </ViewHome>

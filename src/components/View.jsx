@@ -25,8 +25,8 @@ flex-direction: row-reverse;
 justify-content: center;
 align-items: center;
 width: 100vw;
-margin-top: 100px;
-padding-bottom: 200px;
+margin-top: 150px;
+padding-bottom: 50px;
 @media (max-width: 768px) {
   display: flex;
   flex-direction: column;
