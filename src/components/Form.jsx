@@ -57,7 +57,7 @@ font-weight: 600;
 border: dashed 1px;
 color: black;
 @media (max-width: 1100px) {
-  width: 70vw;
+  width: 50vw;
   }
 `
 
