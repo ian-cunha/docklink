@@ -47,7 +47,7 @@ color: black;
 `
 
 export const InputBox = styled.input`
-width: 500px;
+width: 40vw;
 height: 30px;
 background: white;
 border-radius: 5px;
@@ -57,7 +57,7 @@ font-weight: 600;
 border: dashed 1px;
 color: black;
 @media (max-width: 1100px) {
-  width: auto;
+  width: 70vw;
   }
 `
 

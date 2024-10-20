@@ -95,7 +95,7 @@ background: white;
 color: black;
 padding: 5px 10px;
 border-radius: 10px;
-width: 650px;
+width: auto;
 display: flex;
 flex-direction: row;
 align-items: center;
@@ -104,7 +104,7 @@ margin: 8px 0;
 box-shadow: 5px 10px black;
 @media (max-width: 1100px) {
   flex-direction: row;
-  width: 100%;
+  width: auto;
   }
 `
 
