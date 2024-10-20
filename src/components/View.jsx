@@ -25,7 +25,6 @@ flex-direction: row-reverse;
 justify-content: center;
 align-items: center;
 width: 100vw;
-height: 100vh;
 margin-top: 100px;
 padding-bottom: 200px;
 @media (max-width: 768px) {
@@ -59,26 +58,25 @@ background: white;
 `
 
 export const BlockView = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-margin-top: 200px;
-width: 100vw;
-height: 100vh;
-@media (max-width: 1150px) {
-  display: block;
+  display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 100px;
-  width: 100vw;
-  height: 100vh;
+  align-items: flex-start;
+  margin-top: 20px;
+
+  @media (max-width: 1150px) {
+    display: block;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 100px;
+    width: 100vw;
+    height: auto;
   }
-`
+`;
 
 export const Block = styled.div`
 animation: bounceInDown;
 animation-duration: 1s;
-margin: 250px 50px;
+margin: 110px 50px;
 padding: 24px;
 border-radius: 20px;
 color: white;

@@ -1,127 +1,187 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-undef */
-import { View, BlockView, Block } from "../components/View"
-import { Message } from "../components/Message";
-import { ErrorMessage } from "../components/ErrorMessage";
-
-import { Navigate } from 'react-router-dom'
+import styled from 'styled-components';
+import { View, BlockView, Block } from "../components/View";
+import { Navigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
-
 import { NavBoard } from "../components/NavBoard";
-
-import { Structure } from "../components/Structure"
-
-import { auth, storeApp } from "../config/firebase"
-import { doc, getDoc, updateDoc, deleteField } from "firebase/firestore";
+import { Structure } from "../components/Structure";
+import { auth, storeApp, storage } from "../config/firebase";
+import { doc, getDoc, updateDoc, deleteField, query, where, getDocs, collection } from "firebase/firestore";
 import { Button } from "../components/Button";
 import { InputLogin } from "../components/Form";
+import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// Styled Component para o input de arquivo
+const File = styled.div`
+  margin-top: 30px;
+  margin-bottom: 10px;
+`;
+
+const FileInput = styled.input`
+  display: none; /* Oculta o input padrão */
+`;
+
+const FileLabel = styled.label`
+border-radius: 100px;
+background: white;
+color: black;
+padding: 10px 80px;
+margin: 14px;
+border-style: none;
+font-size: 1.2em;
+font-weight: 600;
+border-style: solid;
+border-color: transparent;
+cursor: pointer;
+&:hover {
+  transition: 0.6s all; 
+  background: #535BF2;
+  border-color: rgba(255, 255, 255, 0.87);
+  border-style: solid;
+  color: white;
+}
+`;
 
 export const Settings = () => {
-
   const user = auth.currentUser;
   const uid = user.uid;
 
-  const [dataBase, setDataBase] = useState('')
+  const [dataBase, setDataBase] = useState('');
+  const [nameDisplay, setNameDisplay] = useState('');
+  const [photoFile, setPhotoFile] = useState(null);
 
   const getDataBase = async () => {
-    const docRef = doc(storeApp, "users", uid)
-    const docSnap = await getDoc(docRef)
+    const docRef = doc(storeApp, "users", uid);
+    const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      setDataBase(docSnap.data())
-      console.log(docSnap.data())
+      setDataBase(docSnap.data());
+      setNameDisplay(docSnap.data().name);
     } else {
-      console.log("Sem dados!")
+      console.log("Sem dados!");
     }
-  }
+  };
 
   useEffect(() => {
-    getDataBase()
-  }, [])
+    getDataBase();
+  }, []);
 
-  const [nameDisplay, setNameDisplay] = useState(dataBase.name)
-  const [newPhoto, setNewPhoto] = useState(dataBase.photo)
-  const handleDisplayName = (event) => setNameDisplay(event.target.value)
-  const handleNewPhoto = (event) => setNewPhoto(event.target.value)
+  const handleDisplayName = (event) => setNameDisplay(event.target.value);
+  const handlePhotoFileChange = (event) => setPhotoFile(event.target.files[0]);
 
-  const [message, setMessage] = useState(true);
+  const checkNameAvailability = async (name) => {
+    const usersRef = collection(storeApp, "users");
+    const q = query(usersRef, where("name", "==", name));
+    const querySnapshot = await getDocs(q);
+    return !querySnapshot.empty;
+  };
 
   const handleUpdateName = async (event) => {
-    if (nameDisplay != 0) {
-      event.preventDefault()
+    event.preventDefault();
 
-      await updateDoc(doc(storeApp, "users", uid), {
-        name: nameDisplay,
-      });
-      setMessage(
-        <Message>Nome atualizado!</Message>
-      )
-      setTimeout(function () {
-        setMessage(false)
-      }, 2000)
-      window.location.reload(false);
-    } else {
-      event.preventDefault()
-
-      setMessage(
-        <ErrorMessage>Erro, nome está vazio ou igual!</ErrorMessage>
-      )
-      setTimeout(function () {
-        setMessage(false)
-      }, 2000)
+    if (nameDisplay.trim() === '' || nameDisplay.includes(' ')) {
+      toast.error("Erro, nome não pode conter espaços. Por favor, insira um nome válido.");
+      return;
     }
-  }
 
-  const handleUpdatePhoto = async (event) => {
-    if (photo) {
-      event.preventDefault()
-
-      await updateDoc(doc(storeApp, "users", uid), {
-        photo: newPhoto,
-      });
-      setMessage(
-        <Message>Foto atualizada!</Message>
-      )
-      setTimeout(function () {
-        setMessage(false)
-      }, 2000)
-      window.location.reload(false);
-    } else {
-      event.preventDefault()
-
-      setMessage(
-        <ErrorMessage>Erro, foto está igual!</ErrorMessage>
-      )
-      setTimeout(function () {
-        setMessage(false)
-      }, 2000)
+    const nameExists = await checkNameAvailability(nameDisplay);
+    if (nameExists) {
+      toast.error("Erro, nome não está disponível. Por favor, escolha outro.");
+      return;
     }
-  }
-
-  const deletePhoto = async (event) => {
-    event.preventDefault()
 
     await updateDoc(doc(storeApp, "users", uid), {
-      photo: deleteField(),
+      name: nameDisplay,
     });
-    window.location.reload(false);
-  }
+    toast.success("Nome atualizado!");
+
+    // Atualiza o estado local
+    setDataBase(prevData => ({ ...prevData, name: nameDisplay }));
+  };
+
+  const handleUpdatePhoto = async (event) => {
+    event.preventDefault();
+
+    if (photoFile) {
+      const userEmail = auth.currentUser.email;
+      const oldPhotoRef = ref(storage, `images/${userEmail}/profile.jpg`);
+
+      try {
+        await deleteObject(oldPhotoRef);
+        console.log("Foto antiga excluída com sucesso.");
+      } catch (error) {
+        console.log("Erro ao excluir a foto antiga:", error);
+      }
+
+      const storageRef = ref(storage, `images/${userEmail}/profile.jpg`);
+      await uploadBytes(storageRef, photoFile);
+      const photoURL = await getDownloadURL(storageRef);
+
+      await updateDoc(doc(storeApp, "users", uid), {
+        photo: photoURL,
+      });
+      toast.success("Foto atualizada!");
+
+      // Atualiza o estado local
+      setDataBase(prevData => ({ ...prevData, photo: photoURL }));
+    } else {
+      toast.error("Erro, selecione uma foto!");
+    }
+  };
+
+  const deletePhoto = async (event) => {
+    event.preventDefault();
+
+    const userEmail = auth.currentUser.email;
+    const photoRef = ref(storage, `images/${userEmail}/profile.jpg`);
+
+    try {
+      await deleteObject(photoRef);
+      console.log("Foto excluída com sucesso.");
+      await updateDoc(doc(storeApp, "users", uid), {
+        photo: deleteField(),
+      });
+      toast.success("Foto removida com sucesso!");
+
+      // Atualiza o estado local
+      setDataBase(prevData => ({ ...prevData, photo: null }));
+    } catch (error) {
+      console.error("Erro ao remover a foto:", error);
+      toast.error("Erro ao remover a foto. Tente novamente.");
+    }
+  };
 
   if (dataBase.name === null) {
-    return <Navigate to='/welcome'></Navigate>
+    return <Navigate to='/welcome'></Navigate>;
   }
 
   return (
     <View>
-      {message}
       <NavBoard />
       <BlockView>
         <Block>
           <div>
             <h2>Configurações</h2>
-            <InputLogin type="name" id="name" defaultValue={dataBase.name} value={nameDisplay} placeholder="Nome" onChange={handleDisplayName} />
+            <InputLogin
+              type="text"
+              id="name"
+              defaultValue={dataBase.name}
+              value={nameDisplay}
+              placeholder="Nome de usuário"
+              onChange={handleDisplayName}
+            />
             <Button className="bi bi-textarea-t" onClick={handleUpdateName}> Aplicar</Button>
-            <InputLogin type="url" id="photo" defaultValue={dataBase.photo} value={newPhoto} placeholder="Foto de perfil" onChange={handleNewPhoto} />
+            {/* Input de foto estilizado */}
+            <File>
+              <FileInput
+                type="file"
+                accept="image/*"
+                id="photo-upload"
+                onChange={handlePhotoFileChange}
+              />
+              <FileLabel htmlFor="photo-upload">Selecionar Foto</FileLabel>
+            </File>
             <Button className="bi bi-image" onClick={handleUpdatePhoto}> Aplicar</Button>
             <Button onClick={deletePhoto} type="button" className="bi bi-trash3"> Remover</Button>
           </div>
@@ -130,6 +190,8 @@ export const Settings = () => {
           <Structure />
         </Block>
       </BlockView>
+
+      <ToastContainer />
     </View>
-  )
-}
+  );
+};

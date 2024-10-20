@@ -43,7 +43,7 @@ function App() {
       <GlobalStyle />
       <Routes>
         <Route index path="/" element={<Home />} />
-        <Route index path="/:uid" element={<Share />} />
+        <Route index path="/:nameDisplay" element={<Share />} />
         <Route index path="/login" element={<LoginRegister user={user} />} />
         <Route index path="/dashboard" element={
           <ProtectedRoute user={user}>

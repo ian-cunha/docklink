@@ -135,3 +135,22 @@ cursor: pointer;
   color: #535BF2;
 };
 `
+
+export const ButtonPlus = styled.button`
+border-radius: 100px;
+background: black;
+padding: 10px 30px;
+margin: 14px;
+border-style: none;
+font-size: 1.2em;
+font-weight: 600;
+border-style: solid;
+border-color: transparent;
+cursor: pointer;
+&:hover {
+  transition: 0.6s all; 
+  background: #535BF2;
+  border-color: rgba(255, 255, 255, 0.87);
+  border-style: solid;
+}
+`

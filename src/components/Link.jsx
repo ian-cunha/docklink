@@ -18,7 +18,6 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-background: black;
 `
 
 export const BlockBtn = styled.div`
@@ -36,20 +35,15 @@ text-align: center;
 export const LinkBtn = styled.a`
 color: white;
 text-decoration: none;
-background: black;
-box-shadow: 3px 6px #535BF2;
 padding: 15px 0;
 display: block;
 border-style: solid;
 border-width: 1px;
-border-color: #535BF2;
 border-radius: 50px;
-&:hover {
-  transition: 1s all;  
-  background: #535BF2;
-  color: white;
-  box-shadow: 3px 6px white;
-}
+  transition: all 0.3s ease;
+  &:hover {
+    transform: scale(1.05);
+  }
 `
 
 export const Logo = styled.img`

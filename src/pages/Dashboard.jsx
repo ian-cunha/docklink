@@ -1,169 +1,93 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { View, BlockView, Block, Items, ViewBox, ViewButtons } from "../components/View"
-import { Navigate } from 'react-router-dom'
-import { auth, storeApp } from "../config/firebase"
-import { doc, updateDoc, getDoc, deleteField } from "firebase/firestore";
-import { Structure } from "../components/Structure"
+import { View, BlockView, Block, Items, ViewBox, ViewButtons } from "../components/View";
+import { Navigate } from 'react-router-dom';
+import { auth, storeApp } from "../config/firebase";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
+import { Structure } from "../components/Structure";
 import { NavBoard } from "../components/NavBoard";
 import { InputBox, InputView } from "../components/Form";
-import { ButtonBox } from "../components/Button";
+import { ButtonBox, ButtonPlus } from "../components/Button";
 import { useState, useEffect } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Dashboard = () => {
-
   const user = auth.currentUser;
   const uid = user.uid;
 
-  const [dataBase, setDataBase] = useState('')
+  const [dataBase, setDataBase] = useState({});
+  const [links, setLinks] = useState([]);
 
+  // Função para buscar os dados do Firestore
   const getDataBase = async () => {
-    const docRef = doc(storeApp, "users", uid)
-    const docSnap = await getDoc(docRef)
+    const docRef = doc(storeApp, "users", uid);
+    const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      setDataBase(docSnap.data())
-      console.log(docSnap.data())
+      setDataBase(docSnap.data());
+      setLinks(docSnap.data().links || []); // Busca o array de links, ou um array vazio se não existir
     } else {
-      console.log("Sem dados!")
+      console.log("Sem dados!");
     }
-  }
+  };
 
   useEffect(() => {
-    getDataBase()
-  }, [])
+    getDataBase();
+  }, []);
 
-  const [newTitle1, setTitle1] = useState(dataBase.title1)
-  const handleTitle1 = (event) => setTitle1(event.target.value)
+  // Função para atualizar o estado dos links conforme o usuário digita
+  const handleInputChange = (index, field, value) => {
+    const updatedLinks = [...links];
+    updatedLinks[index][field] = value;
+    setLinks(updatedLinks);
+  };
 
-  const [newTitle2, setTitle2] = useState(dataBase.title2)
-  const handleTitle2 = (event) => setTitle2(event.target.value)
+  // Função para validar se a URL é válida
+  const isValidUrl = (url) => {
+    const pattern = new RegExp('^(https?:\\/\\/)?'+ // protocolo
+      '((([a-z\\d]{1,})[a-z\\d-]{0,})\\.)+([a-z]{2,})'+ // domínio
+      '(\\:[0-9]{1,5})?(\\/.*)?$', 'i'); // porta e caminho
+    return pattern.test(url);
+  };
 
-  const [newTitle3, setTitle3] = useState(dataBase.title3)
-  const handleTitle3 = (event) => setTitle3(event.target.value)
+  // Função para salvar ou atualizar um link no Firestore
+  const saveLink = async (index) => {
+    const updatedLinks = [...links];
+    const newLink = links[index];
+    
+    if (newLink.title && newLink.url) {
+      if (!isValidUrl(newLink.url)) {
+        toast.error("Erro: URL inválida! Por favor, insira um link válido."); // Notificação de erro
+        return;
+      }
+      
+      await updateDoc(doc(storeApp, "users", uid), {
+        links: updatedLinks, // Atualiza o array de links no Firestore
+      });
+      toast.success("Link atualizado com sucesso!"); // Notificação de sucesso
+    } else {
+      toast.error("Erro: Título e URL são obrigatórios!"); // Notificação de erro
+    }
+  };
 
-  const [newTitle4, setTitle4] = useState(dataBase.title4)
-  const handleTitle4 = (event) => setTitle4(event.target.value)
-
-  const [newTitle5, setTitle5] = useState(dataBase.title5)
-  const handleTitle5 = (event) => setTitle5(event.target.value)
-
-  const [newUrl1, setUrl1] = useState(dataBase.url1)
-  const handleUrl1 = (event) => setUrl1(event.target.value)
-
-  const [newUrl2, setUrl2] = useState(dataBase.url2)
-  const handleUrl2 = (event) => setUrl2(event.target.value)
-
-  const [newUrl3, setUrl3] = useState(dataBase.url3)
-  const handleUrl3 = (event) => setUrl3(event.target.value)
-
-  const [newUrl4, setUrl4] = useState(dataBase.url4)
-  const handleUrl4 = (event) => setUrl4(event.target.value)
-
-  const [newUrl5, setUrl5] = useState(dataBase.url5)
-  const handleUrl5 = (event) => setUrl5(event.target.value)
-
-  const updateLink1 = async (event) => {
-    event.preventDefault()
-
+  // Função para excluir um link
+  const deleteLink = async (index) => {
+    const updatedLinks = links.filter((_, i) => i !== index); // Remove o link do array
     await updateDoc(doc(storeApp, "users", uid), {
-      title1: newTitle1,
-      url1: newUrl1,
+      links: updatedLinks, // Atualiza o array no Firestore
     });
-    window.location.reload(false);
-  }
+    setLinks(updatedLinks); // Atualiza o estado local
+    toast.warn("Link removido!"); // Notificação de remoção
+  };
 
-  const updateLink2 = async (event) => {
-    event.preventDefault()
-
-    await updateDoc(doc(storeApp, "users", uid), {
-      title2: newTitle2,
-      url2: newUrl2,
-    });
-    window.location.reload(false);
-  }
-
-  const updateLink3 = async (event) => {
-    event.preventDefault()
-
-    await updateDoc(doc(storeApp, "users", uid), {
-      title3: newTitle3,
-      url3: newUrl3,
-    });
-    window.location.reload(false);
-  }
-
-  const updateLink4 = async (event) => {
-    event.preventDefault()
-
-    await updateDoc(doc(storeApp, "users", uid), {
-      title4: newTitle4,
-      url4: newUrl4,
-    });
-    window.location.reload(false);
-  }
-
-  const updateLink5 = async (event) => {
-    event.preventDefault()
-
-    await updateDoc(doc(storeApp, "users", uid), {
-      title5: newTitle5,
-      url5: newUrl5,
-    });
-    window.location.reload(false);
-  }
-
-  const deleteLink1 = async (event) => {
-    event.preventDefault()
-
-    await updateDoc(doc(storeApp, "users", uid), {
-      title1: deleteField(),
-      url1: deleteField(),
-    });
-    window.location.reload(false);
-  }
-
-  const deleteLink2 = async (event) => {
-    event.preventDefault()
-
-    await updateDoc(doc(storeApp, "users", uid), {
-      title2: deleteField(),
-      url2: deleteField(),
-    });
-    window.location.reload(false);
-  }
-
-  const deleteLink3 = async (event) => {
-    event.preventDefault()
-
-    await updateDoc(doc(storeApp, "users", uid), {
-      title3: deleteField(),
-      url3: deleteField(),
-    });
-    window.location.reload(false);
-  }
-
-  const deleteLink4 = async (event) => {
-    event.preventDefault()
-
-    await updateDoc(doc(storeApp, "users", uid), {
-      title4: deleteField(),
-      url4: deleteField(),
-    });
-    window.location.reload(false);
-  }
-
-  const deleteLink5 = async (event) => {
-    event.preventDefault()
-
-    await updateDoc(doc(storeApp, "users", uid), {
-      title5: deleteField(),
-      url5: deleteField(),
-    });
-    window.location.reload(false);
-  }
+  // Função para adicionar um novo link (deixa o link vazio para ser preenchido)
+  const addNewLink = () => {
+    setLinks([...links, { title: "", url: "" }]);
+    toast.info("Novo link adicionado!"); // Notificação de adição
+  };
 
   if (dataBase.name === null) {
-    return <Navigate to='/welcome'></Navigate>
+    return <Navigate to='/welcome' />;
   }
 
   return (
@@ -171,101 +95,45 @@ export const Dashboard = () => {
       <NavBoard />
       <BlockView>
         <Block>
-          <Items>
-            <ViewBox>
-              <InputView>
-                <i className="bi bi-pen"></i>
-                <InputBox defaultValue={dataBase.title1} value={newTitle1} onChange={handleTitle1} type="text" placeholder="Título" />
-              </InputView>
-              <InputView>
-                <i className="bi bi-pen"></i>
-                <InputBox defaultValue={dataBase.url1} value={newUrl1} onChange={handleUrl1} type="text" placeholder="URL" />
-              </InputView>
-            </ViewBox>
-            <ViewBox>
-              <ViewButtons>
-                <ButtonBox onClick={updateLink1} type="submit" className="bi bi-cloud-upload" />
-                <ButtonBox onClick={deleteLink1} type="button" className="bi bi-trash3" />
-              </ViewButtons>
-            </ViewBox>
-          </Items>
-          <Items>
-            <ViewBox>
-              <InputView>
-                <i className="bi bi-pen"></i>
-                <InputBox defaultValue={dataBase.title2} value={newTitle2} onChange={handleTitle2} type="text" placeholder="Título" />
-              </InputView>
-              <InputView>
-                <i className="bi bi-pen"></i>
-                <InputBox defaultValue={dataBase.url2} value={newUrl2} onChange={handleUrl2} type="text" placeholder="URL" />
-              </InputView>
-            </ViewBox>
-            <ViewBox>
-              <ViewButtons>
-                <ButtonBox onClick={updateLink2} type="submit" className="bi bi-cloud-upload" />
-                <ButtonBox onClick={deleteLink2} type="button" className="bi bi-trash3" />
-              </ViewButtons>
-            </ViewBox>
-          </Items>
-          <Items>
-            <ViewBox>
-              <InputView>
-                <i className="bi bi-pen"></i>
-                <InputBox defaultValue={dataBase.title3} value={newTitle3} onChange={handleTitle3} type="text" placeholder="Título" />
-              </InputView>
-              <InputView>
-                <i className="bi bi-pen"></i>
-                <InputBox defaultValue={dataBase.url3} value={newUrl3} onChange={handleUrl3} type="text" placeholder="URL" />
-              </InputView>
-            </ViewBox>
-            <ViewBox>
-              <ViewButtons>
-                <ButtonBox onClick={updateLink3} type="submit" className="bi bi-cloud-upload" />
-                <ButtonBox onClick={deleteLink3} type="button" className="bi bi-trash3" />
-              </ViewButtons>
-            </ViewBox>
-          </Items>
-          <Items>
-            <ViewBox>
-              <InputView>
-                <i className="bi bi-pen"></i>
-                <InputBox defaultValue={dataBase.title4} value={newTitle4} onChange={handleTitle4} type="text" placeholder="Título" />
-              </InputView>
-              <InputView>
-                <i className="bi bi-pen"></i>
-                <InputBox defaultValue={dataBase.url4} value={newUrl4} onChange={handleUrl4} type="text" placeholder="URL" />
-              </InputView>
-            </ViewBox>
-            <ViewBox>
-              <ViewButtons>
-                <ButtonBox onClick={updateLink4} type="submit" className="bi bi-cloud-upload" />
-                <ButtonBox onClick={deleteLink4} type="button" className="bi bi-trash3" />
-              </ViewButtons>
-            </ViewBox>
-          </Items>
-          <Items>
-            <ViewBox>
-              <InputView>
-                <i className="bi bi-pen"></i>
-                <InputBox defaultValue={dataBase.title5} value={newTitle5} onChange={handleTitle5} type="text" placeholder="Título" />
-              </InputView>
-              <InputView>
-                <i className="bi bi-pen"></i>
-                <InputBox defaultValue={dataBase.url5} value={newUrl5} onChange={handleUrl5} type="text" placeholder="URL" />
-              </InputView>
-            </ViewBox>
-            <ViewBox>
-              <ViewButtons>
-                <ButtonBox onClick={updateLink5} type="submit" className="bi bi-cloud-upload" />
-                <ButtonBox onClick={deleteLink5} type="button" className="bi bi-trash3" />
-              </ViewButtons>
-            </ViewBox>
-          </Items>
+          {links.map((link, index) => (
+            <Items key={index}>
+              <ViewBox>
+                <InputView>
+                  <i className="bi bi-pen"></i>
+                  <InputBox
+                    value={link.title}
+                    onChange={(e) => handleInputChange(index, 'title', e.target.value)}
+                    type="text"
+                    placeholder="Título"
+                  />
+                </InputView>
+                <InputView>
+                  <i className="bi bi-pen"></i>
+                  <InputBox
+                    value={link.url}
+                    onChange={(e) => handleInputChange(index, 'url', e.target.value)}
+                    type="text"
+                    placeholder="URL"
+                  />
+                </InputView>
+              </ViewBox>
+              <ViewBox>
+                <ViewButtons>
+                  <ButtonBox onClick={() => saveLink(index)} type="button" className="bi bi-save"></ButtonBox>
+                  <ButtonBox onClick={() => deleteLink(index)} type="button" className="bi bi-trash3" />
+                </ViewButtons>
+              </ViewBox>
+            </Items>
+          ))}
+          <ButtonPlus onClick={addNewLink} type="button" className="bi bi-plus"> Adicionar</ButtonPlus>
         </Block>
         <Block>
           <Structure />
         </Block>
       </BlockView>
+
+      {/* Contêiner para exibir notificações */}
+      <ToastContainer />
     </View>
-  )
-}
+  );
+};
