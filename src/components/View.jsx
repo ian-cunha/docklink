@@ -26,6 +26,7 @@ justify-content: center;
 align-items: center;
 width: 100vw;
 margin-top: 150px;
+height: 80vh;
 padding-bottom: 50px;
 @media (max-width: 768px) {
   display: flex;
