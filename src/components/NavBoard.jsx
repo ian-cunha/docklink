@@ -9,7 +9,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { useState, useEffect, useRef } from "react";
 
 export const NavBoard = () => {
-  const user = auth.currentUser ;
+  const user = auth.currentUser;
   const uid = user.uid;
 
   const [dataBase, setDataBase] = useState('');
@@ -41,7 +41,7 @@ export const NavBoard = () => {
   const navigate = useNavigate();
 
   function dotBar() {
-    var barBtn = document.getElementById('nav');
+    const barBtn = document.getElementById('nav');
     if (barBtn.style.display === 'flex') {
       barBtn.style.display = 'none';
     } else {
@@ -50,7 +50,7 @@ export const NavBoard = () => {
   }
 
   function profileBar() {
-    var profileBtn = document.getElementById('nav-profile');
+    const profileBtn = document.getElementById('nav-profile');
     if (profileBtn.style.display === 'flex') {
       profileBtn.style.display = 'none';
     } else {
@@ -58,17 +58,21 @@ export const NavBoard = () => {
     }
   }
 
-  // Fecha o ButtonProfile se clicar fora dele
+  // Fecha o ButtonProfile e o Menu ao clicar fora, somente em telas menores que 768px
   useEffect(() => {
     const handleClickOutsideProfile = (event) => {
-      if (profileRef.current && !profileRef.current.contains(event.target)) {
-        document.getElementById('nav-profile').style.display = 'none';
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        if (profileRef.current && !profileRef.current.contains(event.target)) {
+          document.getElementById('nav-profile').style.display = 'none';
+        }
       }
     };
 
     const handleClickOutsideMenu = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        document.getElementById('nav').style.display = 'none';
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        if (menuRef.current && !menuRef.current.contains(event.target)) {
+          document.getElementById('nav').style.display = 'none';
+        }
       }
     };
 
