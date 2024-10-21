@@ -38,7 +38,7 @@ export const Home = () => {
       </ViewTop>
 
       <Footer>
-        <FooterText>&copy; {new Date().getFullYear()} DockLink. Powered by DockStar.</FooterText>
+        <FooterText>&copy; {new Date().getFullYear()} DockLink. Powered by Ian Cunha.</FooterText>
         <FooterText>Crie, personalize e compartilhe seus links de forma fácil!</FooterText>
       </Footer>
     </ViewHome>
