@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import styled from 'styled-components';
 import { View, BlockView, Block } from "../components/View";
 import { Navigate } from 'react-router-dom';
@@ -23,24 +24,23 @@ const FileInput = styled.input`
 `;
 
 const FileLabel = styled.label`
-border-radius: 100px;
-background: white;
-color: black;
-padding: 10px 80px;
-margin: 14px;
-border-style: none;
-font-size: 1.2em;
-font-weight: 600;
-border-style: solid;
-border-color: transparent;
-cursor: pointer;
-&:hover {
-  transition: 0.6s all; 
-  background: #535BF2;
-  border-color: rgba(255, 255, 255, 0.87);
+  border-radius: 100px;
+  background: white;
+  color: black;
+  padding: 10px 80px;
+  border-style: none;
+  font-size: 1.2em;
+  font-weight: 600;
   border-style: solid;
-  color: white;
-}
+  border-color: transparent;
+  cursor: pointer;
+  &:hover {
+    transition: 0.6s all; 
+    background: #535BF2;
+    border-color: rgba(255, 255, 255, 0.87);
+    border-style: solid;
+    color: white;
+  }
 `;
 
 export const Settings = () => {
@@ -180,7 +180,10 @@ export const Settings = () => {
                 id="photo-upload"
                 onChange={handlePhotoFileChange}
               />
-              <FileLabel htmlFor="photo-upload">Selecionar Foto</FileLabel>
+              {/* Troca o texto do rótulo com base na seleção de foto */}
+              <FileLabel htmlFor="photo-upload">
+                {photoFile ? "Foto Selecionada!" : "Selecionar Foto"}
+              </FileLabel>
             </File>
             <Button className="bi bi-image" onClick={handleUpdatePhoto}> Aplicar</Button>
             <Button onClick={deletePhoto} type="button" className="bi bi-trash3"> Remover</Button>

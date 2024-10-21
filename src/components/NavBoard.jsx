@@ -6,13 +6,15 @@ import { TextProfile } from './Text';
 import { signOut } from "firebase/auth";
 import { auth, storeApp } from "../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export const NavBoard = () => {
   const user = auth.currentUser ;
   const uid = user.uid;
 
   const [dataBase, setDataBase] = useState('');
+  const profileRef = useRef(null); // Referência para o ButtonProfile
+  const menuRef = useRef(null); // Referência para o ButtonBar (Menu)
 
   const getDataBase = async () => {
     const docRef = doc(storeApp, "users", uid);
@@ -56,16 +58,39 @@ export const NavBoard = () => {
     }
   }
 
+  // Fecha o ButtonProfile se clicar fora dele
+  useEffect(() => {
+    const handleClickOutsideProfile = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        document.getElementById('nav-profile').style.display = 'none';
+      }
+    };
+
+    const handleClickOutsideMenu = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        document.getElementById('nav').style.display = 'none';
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutsideProfile);
+    document.addEventListener('mousedown', handleClickOutsideMenu);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutsideProfile);
+      document.removeEventListener('mousedown', handleClickOutsideMenu);
+    };
+  }, []);
+
   return (
     <NavBar>
       <Menu onClick={dotBar} className="bi bi-three-dots" />
-      <ButtonBar id="nav">
+      <ButtonBar id="nav" ref={menuRef}> {/* Adiciona a referência ao Menu */}
         <Button className="bi bi-link-45deg" onClick={() => navigate('/dashboard')}> Links</Button>
         <Button className="bi bi-app" onClick={() => navigate('/appearance')}> Aparência</Button>
         <Button className="bi bi-gear" onClick={() => navigate('/settings')}> Configurações</Button>
       </ButtonBar>
       <Profile onClick={profileBar} className="bi bi-person-circle" />
-      <ButtonProfile id="nav-profile">
+      <ButtonProfile id="nav-profile" ref={profileRef}> {/* Adiciona a referência ao Profile */}
         {dataBase.name && <TextProfile>Olá, {dataBase.name}.</TextProfile>} {/* Exibe o nome do usuário */}
         <Button className='bi bi-share' onClick={() => navigate('/' + dataBase.name)}> Compartilhar</Button>
         <Button className='bi bi-x-circle' onClick={handleSignOut}> Sair</Button>
