@@ -1,16 +1,18 @@
 import styled from "styled-components";
 
 export const View = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-background: black;
-width: 100vw;
-@media (max-width: 768px) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: black;
   width: 100vw;
+  min-height: 100vh;
+  
+  @media (max-width: 768px) {
+    width: 100vw;
   }
-`
+`;
 
 export const ViewStructure = styled.div`
 display: flex;
