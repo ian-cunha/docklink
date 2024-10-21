@@ -18,14 +18,13 @@ export const Dashboard = () => {
   const [dataBase, setDataBase] = useState({});
   const [links, setLinks] = useState([]);
 
-  // Função para buscar os dados do Firestore
   const getDataBase = async () => {
     const docRef = doc(storeApp, "users", uid);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
       setDataBase(docSnap.data());
-      setLinks(docSnap.data().links || []); // Busca o array de links, ou um array vazio se não existir
+      setLinks(docSnap.data().links || []);
     } else {
       console.log("Sem dados!");
     }
@@ -35,55 +34,50 @@ export const Dashboard = () => {
     getDataBase();
   }, []);
 
-  // Função para atualizar o estado dos links conforme o usuário digita
   const handleInputChange = (index, field, value) => {
     const updatedLinks = [...links];
     updatedLinks[index][field] = value;
     setLinks(updatedLinks);
   };
 
-  // Função para validar se a URL é válida
   const isValidUrl = (url) => {
-    const pattern = new RegExp('^(https?:\\/\\/)?'+ // protocolo
-      '((([a-z\\d]{1,})[a-z\\d-]{0,})\\.)+([a-z]{2,})'+ // domínio
-      '(\\:[0-9]{1,5})?(\\/.*)?$', 'i'); // porta e caminho
+    const pattern = new RegExp('^(https?:\\/\\/)?' +
+      '((([a-z\\d]{1,})[a-z\\d-]{0,})\\.)+([a-z]{2,})' +
+      '(\\:[0-9]{1,5})?(\\/.*)?$', 'i');
     return pattern.test(url);
   };
 
-  // Função para salvar ou atualizar um link no Firestore
   const saveLink = async (index) => {
     const updatedLinks = [...links];
     const newLink = links[index];
-    
+
     if (newLink.title && newLink.url) {
       if (!isValidUrl(newLink.url)) {
-        toast.error("Erro: URL inválida! Por favor, insira um link válido."); // Notificação de erro
+        toast.error("Erro: URL inválida! Por favor, insira um link válido.");
         return;
       }
-      
+
       await updateDoc(doc(storeApp, "users", uid), {
-        links: updatedLinks, // Atualiza o array de links no Firestore
+        links: updatedLinks,
       });
-      toast.success("Link atualizado com sucesso!"); // Notificação de sucesso
+      toast.success("Link atualizado com sucesso!");
     } else {
-      toast.error("Erro: Título e URL são obrigatórios!"); // Notificação de erro
+      toast.error("Erro: Título e URL são obrigatórios!");
     }
   };
 
-  // Função para excluir um link
   const deleteLink = async (index) => {
-    const updatedLinks = links.filter((_, i) => i !== index); // Remove o link do array
+    const updatedLinks = links.filter((_, i) => i !== index);
     await updateDoc(doc(storeApp, "users", uid), {
-      links: updatedLinks, // Atualiza o array no Firestore
+      links: updatedLinks,
     });
-    setLinks(updatedLinks); // Atualiza o estado local
-    toast.warn("Link removido!"); // Notificação de remoção
+    setLinks(updatedLinks);
+    toast.warn("Link removido!");
   };
 
-  // Função para adicionar um novo link (deixa o link vazio para ser preenchido)
   const addNewLink = () => {
     setLinks([...links, { title: "", url: "" }]);
-    toast.info("Novo link adicionado!"); // Notificação de adição
+    toast.info("Novo link adicionado!");
   };
 
   if (dataBase.name === null) {
@@ -130,7 +124,6 @@ export const Dashboard = () => {
         </Block>
       </BlockView>
 
-      {/* Contêiner para exibir notificações */}
       <ToastContainer />
     </View>
   );

@@ -10,7 +10,7 @@ import { InputLogin } from "../components/Form";
 
 export const NewUser = () => {
   const [nameDisplay, setNameDisplay] = useState('');
-  const handleNameDisplay = (event) => setNameDisplay(event.target.value.trim()); // Remove espaços em branco ao redor
+  const handleNameDisplay = (event) => setNameDisplay(event.target.value.trim());
 
   const user = auth.currentUser;
   const uid = user.uid;
@@ -18,7 +18,7 @@ export const NewUser = () => {
 
   const [dataBase, setDataBase] = useState(null);
   const [message, setMessage] = useState('');
-  const navigate = useNavigate(); // Hook para navegação
+  const navigate = useNavigate();
 
   const getDataBase = async () => {
     const docRef = doc(storeApp, "users", uid);
@@ -36,13 +36,12 @@ export const NewUser = () => {
     const usersRef = collection(storeApp, "users");
     const q = query(usersRef, where("name", "==", name));
     const querySnapshot = await getDocs(q);
-    return !querySnapshot.empty; // Retorna true se o nome já existir
+    return !querySnapshot.empty;
   };
 
   const newUser = async (event) => {
     event.preventDefault();
 
-    // Verifica se o nome contém espaços
     if (nameDisplay.includes(' ')) {
       setMessage("Erro, nome não pode conter espaços. Por favor, insira um nome válido.");
       setTimeout(() => setMessage(''), 2000);
@@ -62,15 +61,13 @@ export const NewUser = () => {
       email: email,
     });
 
-    // Navega diretamente para o dashboard
     navigate('/dashboard');
   };
 
   useEffect(() => {
     getDataBase();
-  }, []); // Executa apenas na primeira renderização
+  }, []);
 
-  // Redireciona se o usuário já existir
   if (dataBase && dataBase.name) {
     return <Navigate to='/dashboard'></Navigate>;
   }
@@ -79,7 +76,7 @@ export const NewUser = () => {
     <ViewNew>
       <TextH2>Bem-vindo ao Docklink.</TextH2>
       <TextH4>Agora só falta você criar seu usuário para começar...</TextH4>
-      {message && <p>{message}</p>} {/* Exibe a mensagem de erro, se houver */}
+      {message && <p>{message}</p>}
       <InputLogin type="text" placeholder="Nome de usuário" onChange={handleNameDisplay} />
       <Button onClick={newUser}>Confirmar</Button>
     </ViewNew>

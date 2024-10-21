@@ -8,7 +8,6 @@ import image2 from '../assets/image2.svg';
 import { TextTop, FocusTop } from "../components/Text";
 import styled from 'styled-components';
 
-// Componente de estilo para o footer
 const Footer = styled.footer`
   background-color: #141740; /* Cor de fundo do footer */
   color: white;
@@ -24,7 +23,6 @@ const FooterText = styled.p`
   font-size: 14px;
 `;
 
-// Componente principal Home
 export const Home = () => {
   const navigate = useNavigate();
 

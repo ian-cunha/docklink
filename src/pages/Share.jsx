@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
 import { useNavigate, useParams } from 'react-router-dom';
 import { storeApp } from "../config/firebase";
 import { doc, getDoc, query, where, getDocs, collection } from "firebase/firestore";
@@ -9,36 +7,33 @@ import { ViewStructure, View, BlockBtn, LinkBtn, Logo, LogoContainer, TextLogo }
 import logo from '../assets/logo.svg';
 
 export const Share = () => {
-  let { nameDisplay } = useParams(); // Pegando o nome pelo parâmetro
+  let { nameDisplay } = useParams();
   const navigate = useNavigate();
 
   const [dataBase, setDataBase] = useState({});
-  const [backgroundColor, setBackgroundColor] = useState('black'); // Cor padrão do fundo
-  const [buttonColor, setButtonColor] = useState('#535BF2'); // Cor padrão do botão
-  const [buttonShadowColor, setButtonShadowColor] = useState('#141740'); // Cor padrão da sombra do botão
-  const [textColor, setTextColor] = useState('white'); // Cor padrão do texto
-
-  // Novos estados para as cores do título e subtítulo
-  const [titleColor, setTitleColor] = useState('white'); // Cor padrão do título
-  const [subTitleColor, setSubTitleColor] = useState('white'); // Cor padrão do subtítulo
+  const [backgroundColor, setBackgroundColor] = useState('black');
+  const [buttonColor, setButtonColor] = useState('#535BF2');
+  const [buttonShadowColor, setButtonShadowColor] = useState('#141740');
+  const [textColor, setTextColor] = useState('white');
+  const [titleColor, setTitleColor] = useState('white');
+  const [subTitleColor, setSubTitleColor] = useState('white');
 
   const getDataBase = async () => {
     const usersRef = collection(storeApp, "users");
-    const q = query(usersRef, where("name", "==", nameDisplay)); // Busca pelo nome
-
+    const q = query(usersRef, where("name", "==", nameDisplay));
     const querySnapshot = await getDocs(q);
+
     if (!querySnapshot.empty) {
       querySnapshot.forEach((doc) => {
         const userData = doc.data();
         setDataBase(userData);
 
-        // Se existirem, aplicamos as preferências de cores salvas do Firestore
         if (userData.backgroundColor) setBackgroundColor(userData.backgroundColor);
         if (userData.buttonColor) setButtonColor(userData.buttonColor);
         if (userData.buttonShadowColor) setButtonShadowColor(userData.buttonShadowColor);
         if (userData.textColor) setTextColor(userData.textColor);
-        if (userData.titleColor) setTitleColor(userData.titleColor); // Carrega a cor do título
-        if (userData.subTitleColor) setSubTitleColor(userData.subTitleColor); // Carrega a cor do subtítulo
+        if (userData.titleColor) setTitleColor(userData.titleColor);
+        if (userData.subTitleColor) setSubTitleColor(userData.subTitleColor);
         console.log(userData);
       });
     } else {
@@ -46,14 +41,12 @@ export const Share = () => {
     }
   };
 
-  // Atualiza o título da página com o nome do usuário
   document.title = dataBase.name || "Docklink";
 
   useEffect(() => {
     getDataBase();
-  }, [nameDisplay]); // Dependência do nameDisplay para recarregar ao mudar
+  }, [nameDisplay]);
 
-  // Aplicar as cores dinamicamente ao estilo da página
   const viewStyle = {
     backgroundColor: backgroundColor,
     color: textColor,
@@ -62,10 +55,10 @@ export const Share = () => {
   const buttonStyle = {
     backgroundColor: buttonColor,
     color: textColor,
-    boxShadow: `3px 6px ${buttonShadowColor}`, // Aplicando a sombra com a cor escolhida
-    borderWidth: '2px', // Ajuste a largura da borda conforme necessário
-    borderStyle: 'solid', // Define o estilo da borda
-    borderColor: buttonColor, // A cor da borda pode ser a mesma do botão, se desejado
+    boxShadow: `3px 6px ${buttonShadowColor}`,
+    borderWidth: '2px',
+    borderStyle: 'solid',
+    borderColor: buttonColor,
   };
 
   return (
@@ -75,12 +68,9 @@ export const Share = () => {
           {dataBase.photo && (
             <ImageLinking src={dataBase.photo} alt={`Foto de ${dataBase.name}`} />
           )}
-          {/* Aplicando a cor do título */}
           <Title style={{ color: titleColor }}>@{dataBase.name}</Title>
-          {/* Aplicando a cor do subtítulo */}
           <SubTitle style={{ color: subTitleColor }}>{dataBase.email}</SubTitle>
 
-          {/* Verifica se há links e renderiza dinamicamente */}
           {dataBase.links && dataBase.links.length > 0 && (
             dataBase.links.map((link, index) => (
               <BlockBtn key={index}>

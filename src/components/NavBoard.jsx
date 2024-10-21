@@ -13,8 +13,8 @@ export const NavBoard = () => {
   const uid = user.uid;
 
   const [dataBase, setDataBase] = useState('');
-  const profileRef = useRef(null); // Referência para o ButtonProfile
-  const menuRef = useRef(null); // Referência para o ButtonBar (Menu)
+  const profileRef = useRef(null);
+  const menuRef = useRef(null);
 
   const getDataBase = async () => {
     const docRef = doc(storeApp, "users", uid);
